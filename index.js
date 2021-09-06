@@ -41,11 +41,40 @@ const enginneerInputs = [ ...employeeInputs,
   }
 ]
 
-function addEmployee(role) {
-  
+const internInputs = [ ...employeeInputs,
+  {
+    type: 'input',
+    message: 'School name?',
+    name: 'school'
+  }
+]
+
+function addEmployeeInit() {
   inq
-    .prompt(managerInputs)
-    .then(response => console.log(response.initial))
+    .prompt([
+      {
+        type: 'list',
+        message: 'What is the role of the Employee?',
+        choices: ['Manager', 'Engineer', 'Intern'],
+        name: 'role'
+      }
+    ])
+    .then(response => addEmployee(response.role))
+    .catch(err => console.error(err))
 }
 
-addEmployee();
+function addEmployee(role) {
+  let addInputs;
+  if (role === "Manager") {
+    addInputs = managerInputs;
+  } else if (role === "Engineer") {
+    addInputs = enginneerInputs;
+  } else if (role === "Intern") {
+    addInputs = internInputs;
+  }
+  inq
+    .prompt(addInputs)
+    .then(response => console.log(response))
+}
+
+addEmployeeInit();
