@@ -1,0 +1,22 @@
+{
+  "name": "teamprofilegen",
+  "version": "1.0.0",
+  "description": "Gnerates html for a user page by gathering employee data from a command line interface.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davebloisesquire/TeamProfileGen.git"
+  },
+  "author": "Dave \"the kid\" Blois",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/davebloisesquire/TeamProfileGen/issues"
+  },
+  "homepage": "https://github.com/davebloisesquire/TeamProfileGen#readme",
+  "dependencies": {
+    "jest": "^27.1.0"
+  }
+}
