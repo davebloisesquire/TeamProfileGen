@@ -77,4 +77,8 @@ function addEmployee(role) {
     .then(response => console.log(response))
 }
 
+function addMoreEmployees() {
+  
+}
+
 addEmployeeInit();
