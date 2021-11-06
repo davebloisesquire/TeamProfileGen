@@ -1,3 +1,5 @@
+//JUST TESTING THE CONNECTION
+
 //Import Primary Dependencies
 const inq = require("inquirer")
 
@@ -8,8 +10,7 @@ const Engineer = require("./scripts/engineer");
 const Intern = require("./scripts/intern");
 
 //Questions
-const employeeInputs = [
-  {
+const employeeInputs = [{
     type: 'input',
     message: 'Name?',
     name: 'name'
@@ -25,7 +26,7 @@ const employeeInputs = [
     name: 'email'
   }
 ]
-const managerInputs = [ ...employeeInputs,
+const managerInputs = [...employeeInputs,
   {
     type: 'input',
     message: 'Office Number?',
@@ -33,7 +34,7 @@ const managerInputs = [ ...employeeInputs,
   }
 ]
 
-const enginneerInputs = [ ...employeeInputs,
+const enginneerInputs = [...employeeInputs,
   {
     type: 'input',
     message: 'GitHub Username?',
@@ -41,7 +42,7 @@ const enginneerInputs = [ ...employeeInputs,
   }
 ]
 
-const internInputs = [ ...employeeInputs,
+const internInputs = [...employeeInputs,
   {
     type: 'input',
     message: 'School name?',
@@ -51,14 +52,12 @@ const internInputs = [ ...employeeInputs,
 
 function addEmployeeInit() {
   inq
-    .prompt([
-      {
-        type: 'list',
-        message: 'What is the role of the Employee?',
-        choices: ['Manager', 'Engineer', 'Intern'],
-        name: 'role'
-      }
-    ])
+    .prompt([{
+      type: 'list',
+      message: 'What is the role of the Employee?',
+      choices: ['Manager', 'Engineer', 'Intern'],
+      name: 'role'
+    }])
     .then(response => addEmployee(response.role))
     .catch(err => console.error(err))
 }
@@ -75,10 +74,26 @@ function addEmployee(role) {
   inq
     .prompt(addInputs)
     .then(response => console.log(response))
+    .then(data => addMoreEmployees())
 }
 
 function addMoreEmployees() {
-  
+  inq
+    .prompt([{
+      type: 'list',
+      message: 'Add another employee?',
+      choices: ['Yes', 'No'],
+      name: 'addMore'
+    }])
+    .then(response => {
+      if (response.addMore === 'Yes') {
+        addEmployeeInit();
+        return;
+      } else {
+        return;
+      })
+    }
+    .catch(err => console.error(err))
 }
 
 addEmployeeInit();
