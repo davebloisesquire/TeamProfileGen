@@ -12,13 +12,19 @@ class Intern extends Employee {
     return "Intern";
   };
   renderCard() {
-    const newCard = `<div class="card">
-      <h2 class="name">${this.name}</h2>
-      <h3 class="role"><i class="fas fa-graduation-cap"></i> ${this.getRole()}</h3>
-      <h3 class="id">${this.id}</h3>
-      <h3 class="email">${this.email}</h3>
-      <h3 class="flexible-position">${this.school}</h3>
-    </div>`;
+    const newCard = `
+    <article class="column is-one-quarter">
+      <div class="card">
+        <div class="card-content">
+          <h2 class="title">${this.name}</h2>
+          <h3 class="role"><i class="fas fa-graduation-cap"></i> ${this.getRole()}</h3>
+          <h3 class="id">Employee Id: ${this.id}</h3>
+          <h3 class="email"><a href="mailto:${this.email}">${this.email}</a></h3>
+          <h3 class="flexible-position">${this.school}</h3>
+        </div>
+      </div>
+    </article>
+    `
     return newCard;
   }
 }
