@@ -1,7 +1,9 @@
-//JUST TESTING THE CONNECTION
-
 //Import Primary Dependencies
 const inq = require("inquirer")
+const fs = require("fs")
+
+// Import Template
+const pageRender = require("./scripts/pageRender")
 
 //Import classes
 const Employee = require("./scripts/employee");
@@ -9,7 +11,10 @@ const Manager = require("./scripts/manager");
 const Engineer = require("./scripts/engineer");
 const Intern = require("./scripts/intern");
 
-//Questions
+let employeeCards = '';
+
+// Questions
+// Flex position exists as the flex question that is role dependant. The message will be changed depending on the role chosen
 const employeeInputs = [{
     type: 'input',
     message: 'Name?',
@@ -24,32 +29,15 @@ const employeeInputs = [{
     type: 'input',
     message: 'Email?',
     name: 'email'
-  }
-]
-const managerInputs = [...employeeInputs,
+  },
   {
     type: 'input',
-    message: 'Office Number?',
-    name: 'officeNumber'
-  }
+    message: '',
+    name: 'flex'
+  },
 ]
 
-const enginneerInputs = [...employeeInputs,
-  {
-    type: 'input',
-    message: 'GitHub Username?',
-    name: 'github'
-  }
-]
-
-const internInputs = [...employeeInputs,
-  {
-    type: 'input',
-    message: 'School name?',
-    name: 'school'
-  }
-]
-
+// Initializing the employee adding tool by requiring a role type
 function addEmployeeInit() {
   inq
     .prompt([{
@@ -62,18 +50,27 @@ function addEmployeeInit() {
     .catch(err => console.error(err))
 }
 
+// Chosen role type will then determine the flex question asked and which constuctor class is used.
 function addEmployee(role) {
-  let addInputs;
+  let construct;
   if (role === "Manager") {
-    addInputs = managerInputs;
+    employeeInputs[3].message = "Office number?";
+    construct = Manager;
   } else if (role === "Engineer") {
-    addInputs = enginneerInputs;
+    employeeInputs[3].message = "Github Username?";
+    construct = Engineer;
   } else if (role === "Intern") {
-    addInputs = internInputs;
+    employeeInputs[3].message = "School?";
+    construct = Intern;
   }
   inq
-    .prompt(addInputs)
-    .then(response => console.log(response))
+    .prompt(employeeInputs)
+    .then(response => {
+      const newEmployee = new construct(response.name, response.id, response.email, response.flex);
+      return newEmployee;
+    })
+    //.then(response => console.log(response.renderCard()))
+    .then(response => employeeCards = employeeCards + response.renderCard() )
     .then(data => addMoreEmployees())
 }
 
@@ -90,9 +87,9 @@ function addMoreEmployees() {
         addEmployeeInit();
         return;
       } else {
+        pageRender(employeeCards);
         return;
-      })
-    }
+      }})
     .catch(err => console.error(err))
 }
 
