@@ -8,7 +8,7 @@ This is a CLI tool Team Profile Generator. It's designed to build an HTML page o
 This was an object oriented class project making use of Class structure in node and the generated page makes use of the Bulma css library and Font Awesome Icons.
 
 ## Page Generated
-![HTML webpage titled “My Team” features three boxes listing employee names, titles, and other key info.](./Assets/preview.png)
+![HTML webpage titled “My Team” features three boxes listing employee names, titles, and other key info.](./assets/preview.png)
 
 ## Watch the app in action
 [Watch the video here](https://drive.google.com/file/d/1VJv8SIEpEUkOe8XBDqVwqLSzjarGIL9y/view?usp=sharing)
